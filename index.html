@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um lugar seguro pra você 💜</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #32115c, #08050f 70%);
+  color: white;
+  overflow-x: hidden;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 45px 45px;
+  opacity: .07;
+  z-index: -1;
+}
+
+.container {
+  max-width: 950px;
+  width: 92%;
+  margin: auto;
+  padding-bottom: 60px;
+}
+
+header {
+  text-align: center;
+  padding: 70px 20px 35px;
+}
+
+header h1 {
+  color: #d8b4fe;
+  font-size: 2.3rem;
+  margin-bottom: 15px;
+}
+
+header p, p {
+  color: #eadcff;
+  line-height: 1.7;
+}
+
+.card {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 25px;
+  padding: 25px;
+  margin: 24px 0;
+  box-shadow: 0 0 30px rgba(168,85,247,.18);
+  backdrop-filter: blur(12px);
+}
+
+h2 {
+  color: #c084fc;
+  margin-bottom: 12px;
+}
+
+button {
+  margin-top: 16px;
+  padding: 13px 22px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #9333ea, #c084fc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px #a855f7;
+}
+
+.hidden {
+  display: none;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(192,132,252,.13);
+  color: #f5d0fe;
+  animation: fade .7s ease;
+}
+
+.hearts {
+  text-align: center;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+.message-box {
+  margin-top: 18px;
+  min-height: 75px;
+  background: rgba(0,0,0,.25);
+  border-radius: 18px;
+  padding: 20px;
+  color: #f5d0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* JOGO */
+input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  margin-top: 18px;
+  background: #12091f;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.word-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin: 22px 0;
+}
+
+.letter {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #1e1230;
+  border: 1px solid #7e22ce;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.correct { background: #22c55e; }
+.present { background: #ca8a04; }
+.wrong { background: #3f3f46; }
+
+.hint {
+  color: #d8b4fe;
+  margin-top: 8px;
+}
+
+.final {
+  display: none;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #aaa;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+
+<div class="container">
+
+<header>
+  <h1>Um lugar seguro pra você 💜</h1>
+  <p>
+    Talvez hoje tenha sido cansativo, talvez você tenha segurado muita coisa em silêncio,
+    talvez sua mente tenha ficado pesada. Então eu fiz esse cantinho pra te lembrar
+    que você é amada, importante e não precisa passar por tudo sozinha.
+  </p>
+</header>
+
+<section class="card">
+  <h2>Respira um pouquinho...</h2>
+  <p>
+    Amor, se hoje o dia exigiu muito de você, eu queria que aqui fosse como um abraço.
+    Um lugar calmo, sem cobrança, sem pressão, só carinho.
+  </p>
+  <button onclick="mostrar('msg1')">Abrir mensagem escondida</button>
+  <div id="msg1" class="hidden">
+    Você não precisa ser forte o tempo todo. Até as pessoas mais incríveis também precisam de cuidado.
+  </div>
+</section>
+
+<section class="card">
+  <h2>Sobre o seu dia</h2>
+  <p>
+    Se o trabalho cansou, se a cabeça pesou, se o coração ficou apertado,
+    eu quero que você lembre: só de continuar, você já foi forte demais hoje.
+  </p>
+  <button onclick="mostrar('msg2')">Um segredo pra você</button>
+  <div id="msg2" class="hidden">
+    Mesmo nos dias em que você se sente esgotada, você continua sendo linda, especial e importante pra mim.
+  </div>
+</section>
+
+<section class="card">
+  <h2>Eu reparo em você</h2>
+  <p>
+    Eu reparo no seu esforço, no seu cansaço e até nos momentos em que você tenta parecer bem.
+    Eu queria aliviar tudo de uma vez, mas enquanto isso, quero ser apoio.
+  </p>
+  <button onclick="mostrar('msg3')">Clique quando estiver cansada</button>
+  <div id="msg3" class="hidden">
+    Descansa, meu amor. Você merece paz, carinho, colo e alguém que escolha ficar.
+  </div>
+</section>
+
+<section class="card">
+  <h2>Mini carinho interativo</h2>
+  <p>Clique nos corações para receber uma mensagem diferente.</p>
+  <div class="hearts" onclick="novaMensagem()">💜 💜 💜</div>
+  <div class="message-box" id="box">Clique nos corações...</div>
+</section>
+
+<section class="card" id="jogo">
+  <h2>Jogo das palavras do coração</h2>
+  <p>
+    Agora começa um joguinho especial. Acerte as palavras e desbloqueie mensagens escondidas.
+  </p>
+
+  <h2 id="faseTitulo">Fase 1</h2>
+  <p id="dica" class="hint"></p>
+
+  <div class="word-box" id="wordBox"></div>
+
+  <input id="palpite" placeholder="Digite sua tentativa..." onkeydown="if(event.key==='Enter') verificar()">
+  <button onclick="verificar()">Tentar</button>
+
+  <div id="resultado" class="hidden"></div>
+</section>
+
+<section class="card final" id="fim">
+  <h2>Fim de jogo 💜</h2>
+  <p>
+    Você chegou até aqui, amor. E talvez isso pareça só um jogo, mas cada palavra foi escolhida pensando em você.
+    <br><br>
+    No seu cansaço, eu quero ser descanso.  
+    Na sua ansiedade, eu quero ser calma.  
+    Na sua exaustão, eu quero ser colo.  
+    E quando o mundo parecer pesado demais, lembra:
+    <strong>você tá segura agora.</strong>
+    <br><br>
+    Você não precisa enfrentar tudo sozinha. Eu te admiro muito, eu me importo com você
+    e quero que seu coração encontre paz, mesmo nos dias difíceis.
+    <br><br>
+    Feito com carinho por Rafihx 💜
+  </p>
+</section>
+
+<footer>
+  Feito com amor, carinho e cuidado ✨
+</footer>
+
+</div>
+
+<script>
+function mostrar(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+const mensagens = [
+  "Você não precisa carregar tudo sozinha.",
+  "Mesmo cansada, você continua sendo maravilhosa.",
+  "Seu esforço importa, mesmo quando ninguém vê.",
+  "Eu queria te dar um abraço bem forte agora.",
+  "Descansa, amor. Amanhã você tenta de novo.",
+  "Você merece ser cuidada com calma e carinho.",
+  "Eu gosto de você até nos seus dias bagunçados.",
+  "Seu coração merece paz."
+];
+
+function novaMensagem() {
+  const box = document.getElementById("box");
+  box.textContent = mensagens[Math.floor(Math.random() * mensagens.length)];
+}
+
+const fases = [
+  {
+    palavra: "cansaço",
+    dica: "Dica: algo que talvez tenha pesado no seu dia.",
+    msg: "Eu sei que o cansaço às vezes vem forte. Mas você não precisa fingir que está tudo bem. Descansa, respira e lembra que você merece cuidado."
+  },
+  {
+    palavra: "ansiedade",
+    dica: "Dica: quando a mente fica acelerada demais.",
+    msg: "Quando a ansiedade apertar, tenta lembrar: você está aqui, você está respirando e não está sozinha. Eu quero ser calma pra você."
+  },
+  {
+    palavra: "rafihx",
+    dica: "Dica: alguém que fez esse site pensando em você.",
+    msg: "Rafihx te ama muito <3"
+  },
+  {
+    palavra: "exaustão",
+    dica: "Dica: quando o corpo e a alma pedem pausa.",
+    msg: "Mesmo exausta, você continua sendo incrível. Você merece silêncio, carinho, descanso e alguém que não desista de você."
+  },
+  {
+    palavra: "você tá segura agora",
+    dica: "Dica final: a frase que eu queria que seu coração sentisse.",
+    msg: "Você tá segura agora. Aqui tem carinho, apoio, amor e um lugar onde você pode respirar sem medo."
+  }
+];
+
+let faseAtual = 0;
+
+function normalizar(txt) {
+  return txt.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function montarCaixas() {
+  const palavra = fases[faseAtual].palavra;
+  const box = document.getElementById("wordBox");
+  box.innerHTML = "";
+
+  for (let letra of palavra) {
+    const div = document.createElement("div");
+    div.className = "letter";
+    div.textContent = letra === " " ? " " : "";
+    if (letra === " ") {
+      div.style.border = "none";
+      div.style.background = "transparent";
+    }
+    box.appendChild(div);
+  }
+
+  document.getElementById("faseTitulo").textContent = "Fase " + (faseAtual + 1);
+  document.getElementById("dica").textContent = fases[faseAtual].dica;
+}
+
+function verificar() {
+  const input = document.getElementById("palpite");
+  const tentativa = normalizar(input.value);
+  const resposta = normalizar(fases[faseAtual].palavra);
+  const letras = document.querySelectorAll(".letter");
+
+  if (!tentativa) return;
+
+  letras.forEach((box, i) => {
+    const original = fases[faseAtual].palavra[i];
+    box.textContent = original;
+
+    if (original === " ") return;
+
+    const letraTentativa = tentativa[i];
+
+    if (letraTentativa === resposta[i]) {
+      box.className = "letter correct";
+    } else if (resposta.includes(letraTentativa)) {
+      box.className = "letter present";
+    } else {
+      box.className = "letter wrong";
+    }
+  });
+
+  if (tentativa === resposta) {
+    const resultado = document.getElementById("resultado");
+    resultado.style.display = "block";
+    resultado.innerHTML = fases[faseAtual].msg + "<br><br><button onclick='proximaFase()'>Continuar</button>";
+  }
+}
+
+function proximaFase() {
+  faseAtual++;
+  document.getElementById("palpite").value = "";
+  document.getElementById("resultado").style.display = "none";
+
+  if (faseAtual >= fases.length) {
+    document.getElementById("jogo").style.display = "none";
+    document.getElementById("fim").style.display = "block";
+    document.getElementById("fim").scrollIntoView({ behavior: "smooth" });
+  } else {
+    montarCaixas();
+  }
+}
+
+montarCaixas();
+</script>
+
+</body>
+</html>
